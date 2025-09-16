@@ -31,6 +31,7 @@ class M5_ANGLE8 {
 
    public:
     bool begin(uint8_t addr = ANGLE8_I2C_ADDR);
+    bool begin(uint8_t addr = ANGLE8_I2C_ADDR, uint8_t sda = 21, uint8_t scl = 22, uint32_t speed = 100000L);
     bool setDeviceAddr(uint8_t addr);
     bool setLEDColor(uint8_t ch, uint32_t color, uint8_t bright);
     bool getDigitalInput();

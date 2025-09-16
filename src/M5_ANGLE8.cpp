@@ -16,6 +16,22 @@ bool M5_ANGLE8::begin(uint8_t addr) {
     }
 }
 
+/*! @brief Initialize the ANGLE8 with custom I2C pins and speed.
+    @return True if the init was successful, otherwise false.. */
+bool M5_ANGLE8::begin(uint8_t addr, uint8_t sda, uint8_t scl, uint32_t speed) {
+    _wire = &Wire;
+    _addr = addr;
+    _wire->begin(sda, scl, speed);
+    delay(10);
+    _wire->beginTransmission(_addr);
+    uint8_t error = _wire->endTransmission();
+    if (error == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /*! @brief Write a certain length of data to the specified register address.
     @return True if the write was successful, otherwise false.. */
 bool M5_ANGLE8::writeBytes(uint8_t addr, uint8_t reg, uint8_t *buffer,
